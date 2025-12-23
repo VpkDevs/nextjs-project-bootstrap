@@ -1,0 +1,205 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #1a0033 0%, #0d001a 50%, #000 100%);
+}
+
+.header {
+  padding: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #9d4edd;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #9d4edd;
+  text-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #c77dff;
+  margin-top: 8px;
+}
+
+.combatArea {
+  flex: 1;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto 1fr 1fr auto;
+  gap: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.turnOrderSection {
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+}
+
+.enemySection {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.partySection {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.actionSection {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.logSection {
+  grid-column: 1 / 3;
+  grid-row: 4 / 5;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  color: #e0aaff;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px rgba(224, 170, 255, 0.3);
+}
+
+.enemyGrid,
+.partyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.outcomeCard {
+  background: linear-gradient(135deg, #240046 0%, #10002b 100%);
+  border: 3px solid #9d4edd;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.victory {
+  font-size: 48px;
+  color: #7b2cbf;
+  text-shadow: 0 0 20px rgba(123, 44, 191, 0.8);
+  margin-bottom: 20px;
+  animation: pulse 1s infinite;
+}
+
+.defeat {
+  font-size: 48px;
+  color: #e63946;
+  text-shadow: 0 0 20px rgba(230, 57, 70, 0.8);
+  margin-bottom: 20px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.outcomeText {
+  font-size: 18px;
+  color: #e0aaff;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.restartButton {
+  background: linear-gradient(135deg, #7b2cbf 0%, #5a189a 100%);
+  color: white;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(123, 44, 191, 0.4);
+}
+
+.restartButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(123, 44, 191, 0.6);
+  background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
+}
+
+@media (max-width: 1024px) {
+  .combatArea {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto;
+  }
+
+  .turnOrderSection {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  .enemySection {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .partySection {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  .actionSection {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+  }
+
+  .logSection {
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+  }
+}

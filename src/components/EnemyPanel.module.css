@@ -1,0 +1,124 @@
+.panel {
+  background: linear-gradient(135deg, #3d0814 0%, #1a0000 100%);
+  border: 2px solid #9d0208;
+  border-radius: 10px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.panel:hover {
+  border-color: #d00000;
+  box-shadow: 0 4px 15px rgba(208, 0, 0, 0.3);
+}
+
+.dead {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+.targetable {
+  cursor: pointer;
+}
+
+.targetable:hover {
+  border-color: #ff006e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 110, 0.4);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffb3c1;
+}
+
+.level {
+  font-size: 14px;
+  color: #ff758f;
+}
+
+.type {
+  font-size: 12px;
+  color: #ff4d6d;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.barContainer {
+  margin-bottom: 12px;
+}
+
+.barLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #ff758f;
+  margin-bottom: 4px;
+}
+
+.bar {
+  height: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 0, 110, 0.3);
+}
+
+.hpFill {
+  height: 100%;
+  background: linear-gradient(90deg, #e63946 0%, #ff006e 100%);
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.5);
+}
+
+.threatMeter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.threatLabel {
+  font-size: 11px;
+  color: #ff758f;
+}
+
+.threatBar {
+  flex: 1;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 0, 110, 0.3);
+}
+
+.threatFill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff9e00 0%, #ff006e 100%);
+  transition: width 0.3s ease;
+}
+
+.statusEffects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.statusEffect {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: rgba(255, 0, 110, 0.3);
+  border: 1px solid #ff006e;
+  border-radius: 3px;
+  color: #ffb3c1;
+}
