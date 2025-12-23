@@ -74,6 +74,8 @@ export interface Enemy {
   level: number;
   currentHp: number;
   maxHp: number;
+  currentMana: number;
+  maxMana: number;
   stats: CharacterStats;
   statusEffects: ActiveStatusEffect[];
   isAlive: boolean;

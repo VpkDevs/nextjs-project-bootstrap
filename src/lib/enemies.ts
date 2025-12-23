@@ -8,6 +8,8 @@ export const corruptedPriest: Enemy = {
   level: 4,
   currentHp: 100,
   maxHp: 100,
+  currentMana: 50,
+  maxMana: 50,
   stats: {
     vitality: 10,
     strength: 8,
@@ -31,6 +33,8 @@ export const shadowShade: Enemy = {
   level: 3,
   currentHp: 70,
   maxHp: 70,
+  currentMana: 40,
+  maxMana: 40,
   stats: {
     vitality: 7,
     strength: 6,
@@ -54,6 +58,8 @@ export const veilBeast: Enemy = {
   level: 5,
   currentHp: 140,
   maxHp: 140,
+  currentMana: 20,
+  maxMana: 20,
   stats: {
     vitality: 14,
     strength: 16,
@@ -77,6 +83,8 @@ export const sorrowfulEcho: Enemy = {
   level: 4,
   currentHp: 85,
   maxHp: 85,
+  currentMana: 45,
+  maxMana: 45,
   stats: {
     vitality: 8,
     strength: 6,
@@ -100,6 +108,8 @@ export const innerDemon: Enemy = {
   level: 5,
   currentHp: 120,
   maxHp: 120,
+  currentMana: 60,
+  maxMana: 60,
   stats: {
     vitality: 12,
     strength: 10,

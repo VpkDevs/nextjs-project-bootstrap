@@ -16,7 +16,34 @@ export default function Home() {
     // Initialize combat with a sample encounter
     const newEngine = new CombatEngine(playerParty, encounters.mid_game);
     setEngine(newEngine);
+    
+    // If combat starts with enemy turn, trigger it
+    setTimeout(() => {
+      const state = newEngine.getState();
+      if (state.phase === CombatPhase.ENEMY_TURN) {
+        processEnemyTurns(newEngine);
+      }
+    }, 100);
   }, []);
+
+  const processEnemyTurns = (currentEngine: CombatEngine) => {
+    const state = currentEngine.getState();
+    const currentCombatant = currentEngine.getCurrentCombatant() as Enemy;
+    
+    if (currentCombatant && state.phase === CombatPhase.ENEMY_TURN) {
+      setTimeout(() => {
+        currentEngine.enemyTakeTurn(currentCombatant.id);
+        currentEngine.nextTurn();
+        
+        const newState = currentEngine.getState();
+        setEngine(Object.assign(Object.create(Object.getPrototypeOf(currentEngine)), currentEngine));
+        
+        if (newState.phase === CombatPhase.ENEMY_TURN) {
+          processEnemyTurns(currentEngine);
+        }
+      }, 1000);
+    }
+  };
 
   const handleActionSelect = (action: Action) => {
     setSelectedAction(action);
@@ -44,42 +71,21 @@ export default function Home() {
       setTimeout(() => {
         engine.nextTurn();
         
+        // Force re-render
+        setEngine(Object.assign(Object.create(Object.getPrototypeOf(engine)), engine));
+        
         // If it's enemy turn, auto-execute
         const newState = engine.getState();
         if (newState.phase === CombatPhase.ENEMY_TURN) {
           handleEnemyTurn();
         }
-        
-        setEngine(new CombatEngine(
-          newState.playerParty,
-          newState.enemies
-        ));
       }, 500);
     }
   };
 
   const handleEnemyTurn = () => {
     if (!engine) return;
-
-    const state = engine.getState();
-    const currentCombatant = engine.getCurrentCombatant() as Enemy;
-    
-    if (currentCombatant) {
-      setTimeout(() => {
-        engine.enemyTakeTurn(currentCombatant.id);
-        engine.nextTurn();
-        
-        const newState = engine.getState();
-        if (newState.phase === CombatPhase.ENEMY_TURN) {
-          handleEnemyTurn();
-        } else {
-          setEngine(new CombatEngine(
-            newState.playerParty,
-            newState.enemies
-          ));
-        }
-      }, 1000);
-    }
+    processEnemyTurns(engine);
   };
 
   const getAbilitiesForCharacter = (char: Character): Action[] => {
