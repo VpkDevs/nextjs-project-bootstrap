@@ -15,6 +15,7 @@ interface CombatUIProps {
   onActionSelect: (action: Action) => void;
   onTargetSelect: (targetId: string) => void;
   getAbilities: (char: Character) => Action[];
+  onRestart?: () => void;
 }
 
 export default function CombatUI({
@@ -24,6 +25,7 @@ export default function CombatUI({
   onActionSelect,
   onTargetSelect,
   getAbilities,
+  onRestart,
 }: CombatUIProps) {
   const isPlayerTurn = combatState.phase === CombatPhase.PLAYER_TURN;
   const isVictory = combatState.phase === CombatPhase.VICTORY;
@@ -115,7 +117,7 @@ export default function CombatUI({
             </p>
             <button
               className={styles.restartButton}
-              onClick={() => window.location.reload()}
+              onClick={() => onRestart ? onRestart() : window.location.reload()}
             >
               New Battle
             </button>

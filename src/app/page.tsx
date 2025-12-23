@@ -35,9 +35,10 @@ export default function Home() {
         currentEngine.enemyTakeTurn(currentCombatant.id);
         currentEngine.nextTurn();
         
-        const newState = currentEngine.getState();
-        setEngine(Object.assign(Object.create(Object.getPrototypeOf(currentEngine)), currentEngine));
+        // Trigger re-render by updating state reference
+        setEngine({ ...currentEngine } as CombatEngine);
         
+        const newState = currentEngine.getState();
         if (newState.phase === CombatPhase.ENEMY_TURN) {
           processEnemyTurns(currentEngine);
         }
@@ -71,8 +72,8 @@ export default function Home() {
       setTimeout(() => {
         engine.nextTurn();
         
-        // Force re-render
-        setEngine(Object.assign(Object.create(Object.getPrototypeOf(engine)), engine));
+        // Trigger re-render
+        setEngine({ ...engine } as CombatEngine);
         
         // If it's enemy turn, auto-execute
         const newState = engine.getState();
@@ -96,6 +97,21 @@ export default function Home() {
       case 'vincent': return vincentAbilities;
       default: return [];
     }
+  };
+
+  const handleRestart = () => {
+    const newEngine = new CombatEngine(playerParty, encounters.mid_game);
+    setEngine(newEngine);
+    setSelectedAction(null);
+    setSelectedTarget(null);
+    
+    // If combat starts with enemy turn, trigger it
+    setTimeout(() => {
+      const state = newEngine.getState();
+      if (state.phase === CombatPhase.ENEMY_TURN) {
+        processEnemyTurns(newEngine);
+      }
+    }, 100);
   };
 
   if (!engine) {
@@ -125,6 +141,7 @@ export default function Home() {
         onActionSelect={handleActionSelect}
         onTargetSelect={handleTargetSelect}
         getAbilities={getAbilitiesForCharacter}
+        onRestart={handleRestart}
       />
     </main>
   );
